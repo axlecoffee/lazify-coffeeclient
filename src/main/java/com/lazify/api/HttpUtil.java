@@ -27,8 +27,7 @@ public class HttpUtil {
             conn.setConnectTimeout(timeout);
             conn.setReadTimeout(timeout);
             conn.setRequestProperty("User-Agent",
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
-                "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36");
+                "Mozilla/5.0 (net/http; API-Merger/1.0) axlecoffee/3.7.8 +CoffeeClient/CoffeeLazify");
             conn.setRequestProperty("Accept", "application/json");
             if (extraHeaders != null) {
                 for (Map.Entry<String, String> entry : extraHeaders.entrySet()) {
