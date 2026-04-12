@@ -996,7 +996,7 @@ public class OverlayManager {
             }
 
             if (!didwho) { didwho = true; }
-            return false; // suppress ONLINE: line from chat
+            return true;
         }
 
         // Remove players from overlay on final kill
@@ -1508,6 +1508,21 @@ public class OverlayManager {
         }
 
         switch (cmd) {
+            case "on":
+                setVisible(true);
+                print(PREFIX + "\u00a7eOverlay \u00a72enabled\u00a7e.");
+                return;
+
+            case "off":
+                setVisible(false);
+                print(PREFIX + "\u00a7eOverlay \u00a7cdisabled\u00a7e.");
+                return;
+
+            case "toggle":
+                toggleVisible();
+                print(PREFIX + "\u00a7eOverlay \u2192 " + (visible ? "\u00a7aON" : "\u00a7cOFF"));
+                return;
+
             case "sc":
                 if (args.length < 2) { print(PREFIX + "\u00a7eUsage: \u00a73/ov sc <username>"); return; }
                 final String scPlayer = args[1];
@@ -1809,6 +1824,7 @@ public class OverlayManager {
 
     private void printHelp() {
         print(PREFIX + "\u00a77\u2500\u2500\u2500 \u00a7dLazify \u00a77\u2500\u2500\u2500  \u00a77run \u00a73/ov 2\u00a77 for settings");
+        print(PREFIX + "\u00a77on/off/toggle\u00a77 \u00a7e\u2013 control overlay visibility");
         print(PREFIX + "\u00a77sc \u00a7e<user>\u00a77 \u00a7e\u2013 add player to overlay");
         print(PREFIX + "\u00a77hide \u00a7e<user>\u00a77 \u00a7e\u2013 hide player from overlay");
         print(PREFIX + "\u00a77clearhidden\u00a77 \u00a7e\u2013 show all hidden players again");

@@ -1,6 +1,7 @@
 buildscript {
     repositories {
         jcenter()
+        mavenCentral()
         maven { url = "https://maven.minecraftforge.net" }
     }
     dependencies {
@@ -9,6 +10,10 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
 
 version = "3.0"
 group = "com.lazify"
