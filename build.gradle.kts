@@ -69,24 +69,6 @@ val shadowImpl: Configuration by configurations.creating {
     configurations.implementation.get().extendsFrom(this)
 }
 
-val neuJar = layout.buildDirectory.file("deps/NEU-v1_8-2.6.0.jar")
-
-val downloadNeu by tasks.registering {
-    val dest = neuJar
-    outputs.file(dest)
-    doLast {
-        val file = dest.get().asFile
-        if (!file.exists()) {
-            file.parentFile.mkdirs()
-            URI("https://github.com/axlecoffee/CoffeeClient/releases/download/1.2.0/NEU-v1_8-2.6.0.jar")
-                .toURL().openStream().use { input ->
-                    file.outputStream().use { output -> input.copyTo(output) }
-                }
-            println("Downloaded NEU JAR -> ${file.absolutePath}")
-        }
-    }
-}
-
 dependencies {
     minecraft("com.mojang:minecraft:1.8.9")
     mappings("de.oceanlabs.mcp:mcp_stable:22-1.8.9")
@@ -97,12 +79,10 @@ dependencies {
     }
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT")
 
-    compileOnly(files(neuJar))
+    compileOnly(files("F:/CoffeeClient/replaymod/versions/1.8.9/build/libs/ReplayMod-v1_8-2.6.14.jar"))
 
     runtimeOnly("me.djtheredstoner:DevAuth-forge-legacy:1.2.1")
 }
-
-tasks.compileJava { dependsOn(downloadNeu) }
 
 tasks.withType(JavaCompile::class) {
     options.encoding = "UTF-8"
@@ -154,7 +134,7 @@ tasks.shadowJar {
         }
     }
 
-    relocate("$baseGroup.mixin", "io.github.moulberry.notenoughupdates.mixins.$modid")
+    relocate("$baseGroup.mixin", "com.replaymod.replay.mixin.$modid")
 
     fun relocate(name: String) = relocate(name, "$baseGroup.deps.$name")
 }
@@ -166,7 +146,7 @@ val fixMixinConfigs by tasks.registering {
 
     doLast {
         val jar = shadowOut.get().asFile
-        val relocatedPkg = "io.github.moulberry.notenoughupdates.mixins.$modid"
+        val relocatedPkg = "com.replaymod.replay.mixin.$modid"
         val configName = "mixins.$modid.json"
 
         val uri = URI.create("jar:" + jar.toURI())
