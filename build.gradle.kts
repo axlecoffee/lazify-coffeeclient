@@ -214,6 +214,6 @@ tasks.register<Copy>("idep") {
         file("F:\\CoffeeClient\\coffeemods").mkdirs()
     }
     doLast {
-        println("Deployed ${modid}-${version}.coffeeclient.jar -> F:\\LC-TEST\\coffeemods\\")
+        println("Deployed ${modid}-${version}.coffeeclient.jar -> F:\\CoffeeClient\\coffeemods\\")
     }
 }
