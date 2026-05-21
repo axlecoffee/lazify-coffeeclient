@@ -209,9 +209,9 @@ tasks.register<Copy>("idep") {
     from(layout.buildDirectory.dir("libs")) {
         include("*.coffeeclient.jar")
     }
-    into(file("F:\\LC-TEST\\coffeemods"))
+    into(file("F:\\CoffeeClient\\coffeemods"))
     doFirst {
-        file("F:\\LC-TEST\\coffeemods").mkdirs()
+        file("F:\\CoffeeClient\\coffeemods").mkdirs()
     }
     doLast {
         println("Deployed ${modid}-${version}.coffeeclient.jar -> F:\\LC-TEST\\coffeemods\\")
